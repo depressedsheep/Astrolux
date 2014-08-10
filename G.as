@@ -11,7 +11,7 @@
 		public static var setdestination:Boolean;
 		public function G() {
 			// constructor code
-			trace(colourPlanets);
+			
 		}
 
 	}

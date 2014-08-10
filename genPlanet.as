@@ -10,6 +10,7 @@
 		private var _stage;
 		public var units: Object = {};
 		public var unitsIdx = 0;
+		public var unitsCount = 0;
 		private var _spawnTimer;
 		public var planetcolour;
 		public var coords;
@@ -46,11 +47,12 @@
 
 			_stage.addChild(_planet_mc);
 			if (_planetcolour != 0) {
-				_spawnTimer = new Timer(500);
+				_spawnTimer = new Timer(2000);
 				_spawnTimer.addEventListener(TimerEvent.TIMER, spawnunits);
 				function spawnunits(e) {
 					units["unit" + unitsIdx] = new genUnit(colour, pos, level, unitsIdx, args);
 					unitsIdx += 1;
+					unitsCount += 1;
 
 				}
 				_spawnTimer.start();

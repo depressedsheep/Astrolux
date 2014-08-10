@@ -74,10 +74,10 @@
 			isActive = true;
 			_unit_mc.alpha = 1.0;
 			
-			//if (G.setdestination == false) {
-;
+			if (G.setdestination == false) {
+
 				maymove = true;
-			//}
+			}
 
 		}
 		public function deselect() {
@@ -111,7 +111,7 @@
 						if (dss < G.planetsObj["planet" + i].plevel * 10) {
 							trace("upgrade");
 							trace(_unitidx);
-							G.planetsObj["planet" + i].unitsIdx -= 1;
+							G.planetsObj["planet" + i].unitsCount -= 1;
 							G.planetsObj["planet" + i].units["unit" + _unitidx] = null;
 							G.planetsObj["planet" + i].health += 1;
 							if(_stage.contains(_unit_mc))
