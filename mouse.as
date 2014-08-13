@@ -30,14 +30,14 @@
 			if (G.setdestination == false) {
 				G.setdestination = true;
 				for (var i = 0; i < _noPlanets; i++) {
-					trace("--- 1 ---");
+					//trace("--- 1 ---");
 					for (var j = 0; j < G.planetsObj["planet" + i].unitsIdx; j++) {
 					
 						if (G.planetsObj["planet" + i].units["unit" + j] != null) {
-							trace("--- 2 ---");
-							trace(G.planetsObj["planet"+i].units["unit" + j].maymove);
+							//trace("--- 2 ---");
+							//trace(G.planetsObj["planet"+i].units["unit" + j].maymove);
 							if (G.planetsObj["planet" + i].units["unit" + j].maymove == true) {
-								trace("--- 3 ---");
+								//trace("--- 3 ---");
 								G.planetsObj["planet" + i].units["unit" + j].unitmove(_stage.mouseX, _stage.mouseY)
 							}
 						}

@@ -33,6 +33,8 @@
 					_unit_mc.gotoAndStop(1);
 					break;
 				case 1:
+					_unit_mc = new unit_mc();
+					_unit_mc.gotoAndStop(2);
 					break;
 				case 2:
 					break;
@@ -61,9 +63,9 @@
 			function unitTrace(e)
 			{
 				if(_unit_mc.hitTestPoint(_stage.mouseX, _stage.mouseY, true)){
-					trace(" --- DISPLAY VAR --- ");
-					trace("isActive:", isActive);
-					trace("maymove:",maymove);
+					//trace(" --- DISPLAY VAR --- ");
+					//trace("isActive:", isActive);
+					//trace("maymove:",maymove);
 				}
 			}
 
@@ -86,7 +88,7 @@
 			_unit_mc.alpha = 0.6;
 		}
 		public function unitmove(end_x, end_y) {
-			trace("let's go");
+			//trace("let's go");
 			maymove = false;
 			//trace("destination is", end_x, ", ", end_y);
 			_unitTimer.addEventListener(TimerEvent.TIMER, _moveAction);
@@ -108,12 +110,32 @@
 						var dsy = G.planetsObj["planet" + i].coords[1] - end_y;
 
 						var dss = Math.sqrt(dsx * dsx + dsy * dsy);
-						if (dss < G.planetsObj["planet" + i].plevel * 10) {
-							trace("upgrade");
-							trace(_unitidx);
+						if (dss < G.planetsObj["planet" + i].plevel * 10 && G.planetsObj["planet" + i].plevel < G.planetsObj["planet" + i].mplevel) {
+							//trace("upgrade");
+							//trace(_unitidx);
 							G.planetsObj["planet" + i].unitsCount -= 1;
 							G.planetsObj["planet" + i].units["unit" + _unitidx] = null;
 							G.planetsObj["planet" + i].health += 1;
+							if(G.planetsObj["planet" + i].health_visible == false )
+							{
+								G.planetsObj["planet" + i].genHealth();
+								G.planetsObj["planet" + i].health_visible = true;
+							}
+							else{
+								//trace("health cmon");
+								G.planetsObj["planet" + i].updateHealth(G.planetsObj["planet" + i].health);
+								if(G.planetsObj["planet" + i].health % 50 == 0)
+								{
+									trace("upgrade complete");
+									G.planetsObj["planet" + i]._planet_mc.gotoAndStop((1+G.planetsObj["planet" + i].plevel) + 1);
+									G.planetsObj["planet" + i].plevel += 1;
+									if(G.planetsObj["planet" + i].plevel == 3){
+										G.planetsObj["planet" + i].removeHealthBar();
+									}
+									G.planetsObj["planet" + i].health_visible = false;
+								}
+							}
+							
 							if(_stage.contains(_unit_mc))
 							{
 								_stage.removeChild(_unit_mc);
